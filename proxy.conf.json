@@ -1,0 +1,7 @@
+{
+  "/oauth": {
+    "target": "https://api.instagram.com",
+    "secure": true,
+    "changeOrigin": true
+  }
+}
