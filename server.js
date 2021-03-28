@@ -22,8 +22,6 @@ app.get(['/*'], (req, res) => {
   res.sendFile(path.join(__dirname, "dist", "index.html"));
 });
 
-const httpServer = http.createServer({}, app);
-//
-httpServer.listen(PORT, () => console.log(`Listening on ${ PORT }`));
+app.listen(PORT, () => console.log(`Listening on ${ PORT }`));
 
 module.exports = app;
