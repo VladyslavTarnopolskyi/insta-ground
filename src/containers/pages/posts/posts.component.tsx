@@ -50,6 +50,7 @@ const Posts: React.FC = () => {
                   test(post.media_url)
                     ?
                     <img
+                      style={{width: '100%', height: '100%', minHeight: '250px', objectFit: 'cover'}}
                       src={post.media_url} alt={post.id}/>
                       :
                     <video controls style={{maxWidth: '100%'}}>
