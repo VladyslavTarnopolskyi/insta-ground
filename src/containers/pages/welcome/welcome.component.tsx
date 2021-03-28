@@ -10,13 +10,13 @@ const Welcome = () => {
 
   const instagram = 'https://api.instagram.com/oauth/authorize/';
   const clientId = '2867772396804397';
-  const redirectUri = 'https://insta-ground.netlify.app/auth';
+  const redirectUri = 'https://in-ground.herokuapp.com/auth';
   const scope = 'user_profile,user_media';
   const responseType = 'code';
 
   useEffect(() => {
     setIsLoggedIn(!!token);
-  }, [])
+  }, []);
 
   const logOut = () => {
     localStorage.setItem('token', '');
@@ -25,7 +25,7 @@ const Welcome = () => {
     setIsLoggedIn(false);
     window.location.reload();
 
-  }
+  };
 
   const authUri = `${instagram}?client_id=${clientId}&redirect_uri=${redirectUri}&scope=${scope}&response_type=${responseType}`;
 
