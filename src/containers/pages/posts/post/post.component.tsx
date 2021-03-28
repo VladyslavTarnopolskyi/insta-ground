@@ -17,7 +17,7 @@ const Post = () => {
   });
 
   const token = localStorage.getItem('token');
-  let param = useRouteMatch();
+  const param = useRouteMatch();
   // @ts-ignore
   const { id } = param.params || null;
 
@@ -33,15 +33,15 @@ const Post = () => {
             setIsLoaded(true);
             setError(error);
           }
-        )
+        );
     }
-  }, [])
+  }, []);
 
   const test = (link: string): boolean => {
     return !link.includes('mp4');
-  }
+  };
   return (
-    <div className="container">
+    <div className='container'>
       {
         isLoaded ?
           <div style={{textAlign: 'center', paddingTop: '15px'}}>
@@ -52,7 +52,7 @@ const Post = () => {
                   src={post.media_url} alt={post.id}/>
                 :
                 <video controls>
-                  <source src={post.media_url} type="video/mp4"/>
+                  <source src={post.media_url} type='video/mp4'/>
                 </video>
             }
             <div style={{fontSize: '25px'}}>
@@ -64,7 +64,7 @@ const Post = () => {
       }
 
     </div>
-  )
-}
+  );
+};
 
 export default Post;

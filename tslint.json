@@ -12,13 +12,15 @@
     "one-line": false,
     "no-consecutive-blank-lines": false,
     "curly": true,
+    "no-shadowed-variable": false,
     "array-type": [
       true,
       "array"
     ],
     "quotemark": [
-      true,
+      false,
       "single",
+      "double",
       "avoid-escape"
     ],
     "semicolon": [

@@ -23,6 +23,7 @@ const Auth = () => {
           localStorage.setItem('token', response.data.access_token);
           localStorage.setItem('userId', response.data.user_id);
           history.push('/');
+          window.location.reload();
         })
         .catch(error => {
           console.log(error);

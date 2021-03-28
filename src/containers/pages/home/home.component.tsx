@@ -25,12 +25,12 @@ const Home = () => {
             setIsLoaded(true);
             localStorage.setItem('token', '');
             localStorage.setItem('userId', '');
-            history.push('/')
+            history.push('/');
             console.log(error);
           }
-        )
+        );
     }
-  }, [])
+  }, []);
 
   return (
     <div
@@ -56,7 +56,7 @@ const Home = () => {
           : 'Loading...'
       }
     </div>
-  )
-}
+  );
+};
 
 export default Home;

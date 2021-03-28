@@ -26,19 +26,19 @@ const Posts: React.FC = () => {
            setError(error);
            localStorage.setItem('token', '');
            localStorage.setItem('userId', '');
-           history.push('/')
+           history.push('/');
            console.log(error);
          }
-       )
+       );
    }
-  }, [])
+  }, []);
 
   const test = (link: string): boolean => {
     return !link.includes('mp4');
-  }
+  };
 
   return (
-    <div className="container">
+    <div className='container'>
       <ul className={styles.posts}>
         {
           isLoaded ?
@@ -50,11 +50,10 @@ const Posts: React.FC = () => {
                   test(post.media_url)
                     ?
                     <img
-                      style={{width: '100%', height: 'auto', minHeight: '200px'}}
                       src={post.media_url} alt={post.id}/>
                       :
                     <video controls style={{maxWidth: '100%'}}>
-                      <source src={post.media_url} type="video/mp4" />
+                      <source src={post.media_url} type='video/mp4' />
                     </video>
                 }
                   <div className={styles.text}>

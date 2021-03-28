@@ -6,12 +6,12 @@ import { Props } from './header.types';
 import styles from './header.scss';
 
 const Header: React.FC<Props> = ({navLinks}) => {
-  const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false)
+  const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);
   const token = localStorage.getItem('token');
 
   useEffect(() => {
-    setIsLoggedIn(!!token)
-  }, [])
+    setIsLoggedIn(!!token);
+  }, []);
 
   return (
     <header className={styles.header}>
