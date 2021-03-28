@@ -27,7 +27,8 @@ const Post = () => {
         .then(
           (result) => {
             setIsLoaded(true);
-            setPost({...result.data.data});
+            console.log(result);
+            setPost({...result.data});
           },
           (error) => {
             setIsLoaded(true);
