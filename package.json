@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "webpack --config webpack.config.js && node server.js",
+    "start": "node server.js",
     "lint": "tslint -c tslint.json src/**/*.{ts,tsx} --fix --format verbose"
   },
   "keywords": [
