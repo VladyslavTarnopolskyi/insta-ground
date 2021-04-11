@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 
 import styles from './welcome.scss';
 import { useHistory } from 'react-router-dom';
-const url = process.env.NODE_ENV === 'production' ? 'https://in-ground.herokuapp' : 'https://localhost:5000';
+const url = process.env.NODE_ENV === 'production' ? 'https://in-ground.herokuapp.com' : 'https://localhost:5000';
 
 const Welcome = () => {
   const [ isLoggedIn, setIsLoggedIn ] = useState<boolean>(false);

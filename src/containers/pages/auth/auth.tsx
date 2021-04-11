@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useHistory, useLocation } from 'react-router-dom';
 
 import axios from 'axios';
-const url = process.env.NODE_ENV === 'production' ? 'https://in-ground.herokuapp' : 'https://localhost:5000';
+const url = process.env.NODE_ENV === 'production' ? 'https://in-ground.herokuapp.com' : 'https://localhost:5000';
 
 const Auth = () => {
   const [ error, setError ] = useState<boolean>(false);
