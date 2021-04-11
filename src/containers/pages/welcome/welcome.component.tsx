@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 
 import styles from './welcome.scss';
 import { useHistory } from 'react-router-dom';
+const url = process.env.NODE_ENV === 'production' ? 'https://in-ground.herokuapp' : 'https://localhost:5000';
 
 const Welcome = () => {
   const [ isLoggedIn, setIsLoggedIn ] = useState<boolean>(false);
@@ -10,7 +11,7 @@ const Welcome = () => {
 
   const instagram = 'https://api.instagram.com/oauth/authorize/';
   const clientId = '2867772396804397';
-  const redirectUri = 'https://localhost:5000/auth';
+  const redirectUri = `${url}/auth`;
   const scope = 'user_profile,user_media';
   const responseType = 'code';
 
