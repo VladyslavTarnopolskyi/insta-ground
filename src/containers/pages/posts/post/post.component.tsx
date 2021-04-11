@@ -1,13 +1,15 @@
 import React, { useEffect, useState } from 'react';
 
-import { Post } from '../types';
 import { useRouteMatch } from 'react-router';
-import axios from 'axios';
+import { useSelector } from 'react-redux';
+import { State } from '../../../../store/reducers/types';
+import { Media } from '../../../../rest/photos/types';
+import { Link } from 'react-router-dom';
 
 const Post = () => {
-  const [error, setError] = useState(null);
-  const [isLoaded, setIsLoaded] = useState<boolean>(false);
-  const [post, setPost] = useState<Post>({
+  const instaMedia = useSelector((state: State) => state.mediaList.mediaList.data.data);
+  const [ isLoaded, setIsLoaded ] = useState<boolean>(true);
+  const [ post, setPost ] = useState<Media>({
     id: '',
     media_url: '',
     timestamp: '',
@@ -16,25 +18,16 @@ const Post = () => {
     caption: ''
   });
 
-  const token = localStorage.getItem('token');
   const param = useRouteMatch();
   // @ts-ignore
-  const { id } = param.params || null;
+  const {id} = param.params || null;
 
   useEffect(() => {
-    if (token) {
-      axios.get(`https://graph.instagram.com/${id}?fields=id,media_type,media_url,caption,username,timestamp&access_token=${token}`)
-        .then(
-          (result) => {
-            setIsLoaded(true);
-            console.log(result);
-            setPost({...result.data});
-          },
-          (error) => {
-            setIsLoaded(true);
-            setError(error);
-          }
-        );
+    if (id) {
+      const post = instaMedia.find(post => post.id === id);
+      // @ts-ignore
+      setPost(post);
+      setIsLoaded(false);
     }
   }, []);
 
@@ -44,7 +37,7 @@ const Post = () => {
   return (
     <div className='container'>
       {
-        isLoaded ?
+        !isLoaded ?
           <div style={{textAlign: 'center', paddingTop: '15px'}}>
             {
               test(post.media_url) ?
@@ -61,7 +54,7 @@ const Post = () => {
             </div>
           </div>
           :
-          'loading'
+          <Link style={{display: 'flex', padding: '15px', justifyContent: 'center'}} to="/">Go to login</Link>
       }
 
     </div>

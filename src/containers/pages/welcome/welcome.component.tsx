@@ -10,7 +10,7 @@ const Welcome = () => {
 
   const instagram = 'https://api.instagram.com/oauth/authorize/';
   const clientId = '2867772396804397';
-  const redirectUri = 'https://in-ground.herokuapp.com/auth';
+  const redirectUri = 'https://localhost:5000/auth';
   const scope = 'user_profile,user_media';
   const responseType = 'code';
 

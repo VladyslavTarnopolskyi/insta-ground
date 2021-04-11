@@ -10,7 +10,6 @@ const Home = () => {
     id: ''
   });
   const token = localStorage.getItem('token');
-  const userId = localStorage.getItem('userId');
   const history = useHistory();
 
   useEffect(() => {

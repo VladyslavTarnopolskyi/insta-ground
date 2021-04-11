@@ -1,6 +1,7 @@
 import React from 'react';
 import { Route, Switch } from 'react-router-dom';
 import { Router } from 'react-router';
+import { Provider } from 'react-redux';
 
 import { Header } from './components/common/header';
 
@@ -12,6 +13,7 @@ import history from './helpers/history';
 import Posts from './containers/pages/posts';
 import { Post } from './containers/pages/posts/post';
 import Auth from './containers/pages/auth';
+import store from './helpers/store';
 
 const navLinks = [
   {title: 'Home', link: '/home'},
@@ -20,7 +22,7 @@ const navLinks = [
 
 const App = () => {
   return (
-    <>
+    <Provider store={store}>
       <Router history={history}>
         <Header
           navLinks={navLinks}>
@@ -45,7 +47,7 @@ const App = () => {
           </Route>
         </Switch>
       </Router>
-    </>
+    </Provider>
   );
 };
 

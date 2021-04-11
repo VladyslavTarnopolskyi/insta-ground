@@ -2,6 +2,7 @@ const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
+  mode: 'development',
   entry: {
     app: path.join(__dirname, 'src', 'index.tsx')
   },
@@ -72,7 +73,6 @@ module.exports = {
     contentBase: path.join(__dirname, 'dist'),
     publicPath: "/",
     hot: true,
-    compress: true,
     port: 5000,
     historyApiFallback: {
       index: '/',

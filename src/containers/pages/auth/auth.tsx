@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useHistory, useLocation } from 'react-router-dom';
 
 import axios from 'axios';
+const url = process.env.NODE_ENV === 'production' ? 'https://in-ground.herokuapp' : 'https://localhost:5000';
 
 const Auth = () => {
   const [ error, setError ] = useState<boolean>(false);
@@ -15,7 +16,7 @@ const Auth = () => {
       bodyData.append('client_id', '2867772396804397');
       bodyData.append('client_secret', '328c7ada672a57480fd4c8dee2af54d1');
       bodyData.append('grant_type', 'authorization_code');
-      bodyData.append('redirect_uri', 'https://in-ground.herokuapp.com/auth');
+      bodyData.append('redirect_uri', `${url}/auth`);
       bodyData.append('code', `${code}`);
 
       axios.post('/oauth/access_token', bodyData)
