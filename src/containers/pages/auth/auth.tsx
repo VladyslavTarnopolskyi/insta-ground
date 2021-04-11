@@ -7,6 +7,7 @@ const url = process.env.NODE_ENV === 'production' ? 'https://in-ground.herokuapp
 const Auth = () => {
   const [ error, setError ] = useState<boolean>(false);
   const query = new URLSearchParams(useLocation().search);
+
   const history = useHistory();
   const code = query.get('code');
 

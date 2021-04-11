@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from 'react';
-import { Link, useHistory } from 'react-router-dom';
+import React, { useEffect } from 'react';
+import { Link } from 'react-router-dom';
 
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -9,35 +9,46 @@ import { fetchMediaList } from '../../../store/actions/photos';
 import styles from './posts.scss';
 
 const Posts: React.FC = () => {
-  const instaMedia = useSelector((state: State) => state.mediaList.mediaList.data.data);
-  const [ isLoaded, setIsLoaded ] = useState(true);
+  const instaMedia = useSelector((state: State) => state.mediaList.mediaList.data);
   const token = localStorage.getItem('token');
-  const history = useHistory();
   const dispatch = useDispatch();
 
-  const params = `fields=id,caption,media_url,media_type,username,timestamp&access_token=${token}`;
+  let params = `fields=id,caption,media_url,media_type,username,timestamp&access_token=${token}`;
 
   useEffect(() => {
     if (token) {
       dispatch(fetchMediaList(params));
     }
-    if (!instaMedia.length) {
-      setIsLoaded(false);
-      localStorage.setItem('token', '');
-      localStorage.setItem('userId', '');
-      history.push('/');
-    }
-  }, []);
+  }, [fetchMediaList]);
 
-  const test = (link: string): boolean => {
+  const test = (link: string = ''): boolean => {
     return !link.includes('mp4');
   };
 
+  const prevMedia = () => {
+    const par = new URL(instaMedia.paging.previous);
+    params = par.search.slice(1);
+    dispatch(fetchMediaList(params));
+  };
+
+  const nextMedia = () => {
+    const par = new URL(instaMedia.paging.next);
+    params = par.search.slice(1);
+    dispatch(fetchMediaList(params));
+  };
+
   return (
-    <div className='container'>
+    <div className={styles.container}>
+      <div>
+        <button
+          className={styles.navArrow}
+          disabled={!instaMedia.paging.previous}
+          onClick={prevMedia}
+        >&laquo; Prev</button>
+      </div>
       <ul className={styles.posts}>
         {
-          isLoaded ? instaMedia.map(post =>
+          instaMedia.data.length ? instaMedia.data.map(post =>
             <li key={post.id}>
               <Link
                 to={`posts/${post.id}`}>
@@ -57,9 +68,18 @@ const Posts: React.FC = () => {
                 </div>
               </Link>
             </li>
-          ) : 'Loading...'
+          ) : <Link
+            style={{display: 'flex', padding: '15px', justifyContent: 'center'}}
+            to="/">Login</Link>
         }
       </ul>
+      <div>
+        <button
+          className={styles.navArrow}
+          disabled={!instaMedia.paging.next}
+          onClick={nextMedia}
+        >&raquo; Next</button>
+      </div>
     </div>
   );
 };

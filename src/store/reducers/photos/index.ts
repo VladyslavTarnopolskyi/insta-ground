@@ -11,7 +11,8 @@ const INITIAL_STATE: State = {
           after: '',
           before: ''
         },
-        next: ''
+        next: '',
+        previous: ''
       }
     }
   }

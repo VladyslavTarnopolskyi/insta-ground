@@ -7,6 +7,7 @@ export interface GetResponse {
         before: string;
       }
       next: string;
+      previous: string;
     };
   };
 }
