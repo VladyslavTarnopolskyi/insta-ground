@@ -25,16 +25,18 @@ const Posts: React.FC = () => {
     return !link.includes('mp4');
   };
 
-  const prevMedia = () => {
-    const par = new URL(instaMedia.paging.previous);
+  const togglePage = (page: string) => {
+    const par = new URL(page);
     params = par.search.slice(1);
     dispatch(fetchMediaList(params));
   };
 
+  const prevMedia = () => {
+    togglePage(instaMedia.paging.previous);
+  };
+
   const nextMedia = () => {
-    const par = new URL(instaMedia.paging.next);
-    params = par.search.slice(1);
-    dispatch(fetchMediaList(params));
+    togglePage(instaMedia.paging.next);
   };
 
   return (
@@ -77,8 +79,9 @@ const Posts: React.FC = () => {
         <button
           className={styles.navArrow}
           disabled={!instaMedia.paging.next}
-          onClick={nextMedia}
-        >&raquo; Next</button>
+          onClick={nextMedia}>
+          &raquo; Next
+        </button>
       </div>
     </div>
   );
