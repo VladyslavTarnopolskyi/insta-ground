@@ -1,6 +1,6 @@
 import React from 'react';
-import { Route, Switch } from 'react-router-dom';
-import { Router } from 'react-router';
+import { Route, Switch, BrowserRouter as Router } from 'react-router-dom';
+
 import { Provider } from 'react-redux';
 
 import { Header } from './components/common/header';
@@ -9,11 +9,10 @@ import './App.scss';
 import Home from './containers/pages/home';
 import Welcome from './containers/pages/welcome';
 
-import history from './helpers/history';
 import Posts from './containers/pages/posts';
 import { Post } from './containers/pages/posts/post';
 import Auth from './containers/pages/auth';
-import store from './helpers/store';
+import store from './store';
 
 const navLinks = [
   {title: 'Home', link: '/home'},
@@ -23,7 +22,7 @@ const navLinks = [
 const App = () => {
   return (
     <Provider store={store}>
-      <Router history={history}>
+      <Router>
         <Header
           navLinks={navLinks}>
         </Header>
@@ -31,7 +30,6 @@ const App = () => {
           <Route path='/' exact>
             <Welcome />
           </Route>
-
           <Route path='/home'>
             <Home />
           </Route>
@@ -40,7 +38,6 @@ const App = () => {
           </Route>
           <Route path='/posts/:id'>
             <Post/>
-
           </Route>
           <Route path='/auth' exact>
             <Auth/>

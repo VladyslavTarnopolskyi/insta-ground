@@ -2,12 +2,12 @@ import React, { useEffect, useState } from 'react';
 
 import { useRouteMatch } from 'react-router';
 import { useSelector } from 'react-redux';
-import { State } from '../../../../store/reducers/types';
+import { Store } from '../../../../reducers/types';
 import { Media } from '../../../../rest/photos/types';
 import { Link } from 'react-router-dom';
 
 const Post = () => {
-  const instaMedia = useSelector((state: State) => state.mediaList.mediaList.data.data);
+  const instaMedia = useSelector((state: Store) => state.mediaList.mediaList.data.data);
   const [ isLoaded, setIsLoaded ] = useState<boolean>(true);
   const [ post, setPost ] = useState<Media>({
     id: '',

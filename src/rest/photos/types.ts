@@ -1,15 +1,5 @@
 export interface GetResponse {
-  data: {
-    data: Media[];
-    paging: {
-      cursors: {
-        after: string;
-        before: string;
-      }
-      next: string;
-      previous: string;
-    };
-  };
+  data: ResponseData;
 }
 
 export interface Media {
@@ -19,4 +9,20 @@ export interface Media {
   username: string;
   caption: string;
   media_type: string;
+}
+
+export interface ResponseData {
+  data: Media[];
+  paging: Paging;
+}
+
+export interface Paging {
+  cursors: Cursors;
+  next: string;
+  previous: string;
+}
+
+export interface Cursors {
+  after: string;
+  before: string;
 }

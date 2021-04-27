@@ -3,20 +3,20 @@ import { Link } from 'react-router-dom';
 
 import { useDispatch, useSelector } from 'react-redux';
 
-import { State } from '../../../store/reducers/types';
-import { fetchMediaList } from '../../../store/actions/photos';
+import { Store } from '../../../reducers/types';
+import { fetchMediaList } from '../../../actions/photos';
 
 import styles from './posts.scss';
 
 const Posts: React.FC = () => {
-  const instaMedia = useSelector((state: State) => state.mediaList.mediaList.data);
+  const instaMedia = useSelector((state: Store) => state.mediaList.mediaList.data);
   const token = localStorage.getItem('token');
   const dispatch = useDispatch();
 
   let params = `fields=id,caption,media_url,media_type,username,timestamp&access_token=${token}`;
 
   useEffect(() => {
-    if (token) {
+    if (token && !instaMedia.data.length) {
       dispatch(fetchMediaList(params));
     }
   }, [fetchMediaList]);
