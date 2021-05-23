@@ -1,49 +1,39 @@
 import { AnyAction } from 'redux';
 
-import { State } from './types';
+import { State, MediaListState } from './types';
 import { PHOTOS_ACTION } from '../../actions/photos/types';
+import { GetResponse } from "../../rest/photos/types";
 
 const INITIAL_STATE: State = {
-  // isLoading: false,
-  // isError: false,
-  mediaList: {
-    data: {
-      data: [],
-      paging: {
-        cursors: {
-          after: '',
-          before: ''
-        },
-        next: '',
-        previous: ''
-      }
-    },
-  }
+  isLoading: false,
+  isError: false,
+  mediaList: {}
 };
 
-export default function(
+const prepareData = ({data: {data, paging: {next, previous}}}: GetResponse): MediaListState => ({data, next, previous});
+
+export default function (
   state: State = INITIAL_STATE,
   action: AnyAction
 ): State {
   switch (action.type) {
-    case PHOTOS_ACTION.FETCH_MEDIA_LIST:
+    case PHOTOS_ACTION.FETCH_MEDIA_LIST_REQUEST:
       return {
         ...state,
-        // isLoading: true,
-        // isError: false,
-        mediaList: action.payload
+        isLoading: true,
+        isError: false,
       };
     case PHOTOS_ACTION.FETCH_MEDIA_LIST_SUCCESS:
       return {
         ...state,
-        // isError: false,
-        // isLoading: false
+        isLoading: false,
+        mediaList: prepareData(action.payload)
       };
     case PHOTOS_ACTION.FETCH_MEDIA_LIST_FAILURE:
       return {
         ...state,
-        // isError: true,
-        // isLoading: false
+        isError: true,
+        isLoading: false,
       };
     default:
       return state;

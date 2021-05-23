@@ -14,6 +14,7 @@ const Welcome = () => {
   const redirectUri = `${url}/auth`;
   const scope = 'user_profile,user_media';
   const responseType = 'code';
+  console.log(process.env.NODE_ENV);
 
   useEffect(() => {
     setIsLoggedIn(!!token);

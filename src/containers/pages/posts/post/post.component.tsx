@@ -7,7 +7,7 @@ import { Media } from '../../../../rest/photos/types';
 import { Link } from 'react-router-dom';
 
 const Post = () => {
-  const instaMedia = useSelector((state: Store) => state.mediaList.mediaList.data.data);
+  const instaMedia = useSelector((state: Store) => state.mediaList.mediaList.data);
   const [ isLoaded, setIsLoaded ] = useState<boolean>(true);
   const [ post, setPost ] = useState<Media>({
     id: '',
@@ -24,7 +24,7 @@ const Post = () => {
 
   useEffect(() => {
     if (id) {
-      const post = instaMedia.find(post => post.id === id);
+      const post = instaMedia ? instaMedia.find(post => post.id === id) : null;
       // @ts-ignore
       setPost(post);
       setIsLoaded(false);

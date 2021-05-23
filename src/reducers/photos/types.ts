@@ -1,7 +1,13 @@
-import { GetResponse } from '../../rest/photos/types';
+import { Media } from '../../rest/photos/types';
 
-export interface State {
-  mediaList: GetResponse;
+export interface MediaListState {
+  data?: Media[];
+  next?: string;
+  previous?: string;
 }
 
-
+export interface State {
+  isLoading: boolean;
+  isError: boolean;
+  mediaList: MediaListState;
+}

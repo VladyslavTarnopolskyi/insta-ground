@@ -7,13 +7,10 @@ import { PHOTOS_ACTION } from '../../actions/photos/types';
 export function* fetchMediaList(action: AnyAction) {
   try {
     const response = yield call(getAllMedia, action.payload);
-    yield put({
-      payload: response,
-      type: PHOTOS_ACTION.FETCH_MEDIA_LIST
-    });
 
     yield put({
-      type: PHOTOS_ACTION.FETCH_MEDIA_LIST_SUCCESS
+      type: PHOTOS_ACTION.FETCH_MEDIA_LIST_SUCCESS,
+      payload: response,
     });
   } catch (error) {
     yield put({

@@ -9,14 +9,14 @@ import { fetchMediaList } from '../../../actions/photos';
 import styles from './posts.scss';
 
 const Posts: React.FC = () => {
-  const instaMedia = useSelector((state: Store) => state.mediaList.mediaList.data);
+  const instaMedia = useSelector((state: Store) => state.mediaList.mediaList);
   const token = localStorage.getItem('token');
   const dispatch = useDispatch();
 
   let params = `fields=id,caption,media_url,media_type,username,timestamp&access_token=${token}`;
 
   useEffect(() => {
-    if (token && !instaMedia.data.length) {
+    if (token && !instaMedia.data?.length) {
       dispatch(fetchMediaList(params));
     }
   }, [fetchMediaList]);
@@ -32,11 +32,16 @@ const Posts: React.FC = () => {
   };
 
   const prevMedia = () => {
-    togglePage(instaMedia.paging.previous);
+    if (instaMedia.previous) {
+      togglePage(instaMedia.previous);
+    }
+
   };
 
   const nextMedia = () => {
-    togglePage(instaMedia.paging.next);
+    if (instaMedia?.next) {
+      togglePage(instaMedia.next);
+    }
   };
 
   return (
@@ -44,13 +49,13 @@ const Posts: React.FC = () => {
       <div>
         <button
           className={styles.navArrow}
-          disabled={!instaMedia.paging.previous}
+          disabled={!instaMedia.previous}
           onClick={prevMedia}
         >&laquo; Prev</button>
       </div>
       <ul className={styles.posts}>
         {
-          instaMedia.data.length ? instaMedia.data.map(post =>
+          instaMedia.data?.length ? instaMedia.data.map(post =>
             <li key={post.id}>
               <Link
                 to={`posts/${post.id}`}>
@@ -78,7 +83,7 @@ const Posts: React.FC = () => {
       <div>
         <button
           className={styles.navArrow}
-          disabled={!instaMedia.paging.next}
+          disabled={!instaMedia.next}
           onClick={nextMedia}>
           &raquo; Next
         </button>
