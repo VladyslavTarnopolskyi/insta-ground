@@ -1,11 +1,14 @@
 {
   "name": "react-test-app",
   "version": "1.0.0",
+  "engines": {
+    "node": "14.x"
+  },
   "description": "",
   "main": "index.js",
   "scripts": {
     "build": "webpack --mode production",
-    "start": "webpack --config webpack.prod.config.js",
+    "start": "webpack --config webpack.config.js",
     "startDev": "webpack serve --open --config webpack.dev.config.js",
     "lint": "tslint -c tslint.json src/**/*.{ts,tsx} --fix --format verbose"
   },
